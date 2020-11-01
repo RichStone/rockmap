@@ -1,0 +1,2 @@
+class RoadmapController < ApplicationController
+end
