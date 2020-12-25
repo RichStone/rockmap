@@ -1,10 +1,8 @@
 class RoadmapsController < ApplicationController
+  before_action :authenticate_user!, except: [:home]
+
   def show
     @roadmap = Roadmap.last
-  end
-
-  def new
-
   end
 
   def create
