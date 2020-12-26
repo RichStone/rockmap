@@ -2,11 +2,11 @@ class RoadmapsController < ApplicationController
   before_action :authenticate_user!, except: [:home]
 
   def show
-    @roadmap = Roadmap.last
+    @roadmap = current_user.roadmap
   end
 
   def create
-    @roadmap = Roadmap.new(roadmap_params)
+    @roadmap = current_user.create_roadmap(roadmap_params)
     if @roadmap.save
       redirect_to :action => 'show', success: 'Now you are even more awesome!'
     else

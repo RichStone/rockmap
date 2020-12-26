@@ -19,6 +19,6 @@ RSpec.describe "Roadmap", type: :system do
     fill_in 'roadmap[the_one_habit]', with: 'Read\'em all!'
 
     find(:xpath, '//input[@type="submit"]').click
-    expect(page).to have_content 'roadmaps#show'
+    expect(page).to have_content 'Your One Thing'
   end
 end
