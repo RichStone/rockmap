@@ -5,6 +5,10 @@ class RoadmapsController < ApplicationController
     @roadmap = current_user.roadmap
   end
 
+  def new
+    redirect_to controller: 'roadmaps', action: 'show', id: current_user.roadmap.id if current_user.roadmap
+  end
+
   def create
     @roadmap = current_user.create_roadmap(roadmap_params)
     if @roadmap.save
