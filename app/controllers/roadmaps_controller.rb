@@ -15,7 +15,8 @@ class RoadmapsController < ApplicationController
     if @roadmap.save
       redirect_to :action => 'show', success: 'Now you are even more awesome!'
     else
-      redirect_to :action => 'new', alert: 'Something went wrong..'
+      flash[:alert] = 'Wrong details. You can do better ;)'
+      render :new
     end
   end
 
@@ -26,16 +27,14 @@ class RoadmapsController < ApplicationController
   def update
     @roadmap = current_user.roadmap
 
-    if @roadmap.update_attributes(roadmap_params)
+    if @roadmap.update(roadmap_params)
       redirect_to controller: 'roadmaps',
                   action: 'show',
                   id: current_user.roadmap.id,
                   success: 'Hopefully you stick to it now! ;)'
     else
-      redirect_to controller: 'roadmaps',
-                  action: 'show',
-                  id: current_user.roadmap.id,
-                  alert: 'Something went wrong updating your Rockmap :('
+      flash[:alert] = 'Wrong details. You can do better ;)'
+      render :edit
     end
   end
 
