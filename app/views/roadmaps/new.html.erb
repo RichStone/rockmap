@@ -1,4 +1,5 @@
 <h1>Your One Year Rockmap</h1>
+<%= render "flash" %>
 <%= form_with model: Roadmap.new do |form| %>
   <%= form.label :the_one_thing, "Your ONE Thing" %>
   <%= form.text_area :the_one_thing %>

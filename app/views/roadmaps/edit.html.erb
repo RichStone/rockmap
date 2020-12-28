@@ -1,14 +1,5 @@
-<% if @roadmap.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@roadmap.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-    <ul>
-      <% @roadmap.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<h1>Do you really want to change your direction?</h1>
+<%= render "flash" %>
 <%= form_for @roadmap do |form|%>
   <%= form.label :the_one_thing, "Your ONE Thing" %>
   <%= form.text_area :the_one_thing %>
