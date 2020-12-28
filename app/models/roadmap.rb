@@ -6,6 +6,8 @@ class Roadmap < ApplicationRecord
                         :the_one_habit,
                         :start_date
   validate :roadmap_must_start_in_future
+  has_many :milestones
+  accepts_nested_attributes_for :milestones
 
   def roadmap_must_start_in_future
     if start_date.present? && start_date < Date.today

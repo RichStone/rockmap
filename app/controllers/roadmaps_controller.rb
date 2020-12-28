@@ -6,7 +6,14 @@ class RoadmapsController < ApplicationController
   end
 
   def new
-    redirect_to controller: 'roadmaps', action: 'show', id: current_user.roadmap.id if current_user.roadmap
+    if current_user.roadmap
+      redirect_to controller: 'roadmaps',
+                  action: 'show',
+                  id: current_user.roadmap.id
+    end
+
+    @roadmap = Roadmap.new
+    @roadmap.milestones.build
   end
 
   def create
@@ -42,7 +49,11 @@ class RoadmapsController < ApplicationController
 
   def roadmap_params
     params.require(:roadmap).permit(
-      :the_one_thing, :the_why_of_one_thing, :the_one_habit, :start_date
+      :the_one_thing,
+      :the_why_of_one_thing,
+      :the_one_habit,
+      :start_date,
+      {milestones_attributes: [:name, :liveline]}
     )
   end
 end

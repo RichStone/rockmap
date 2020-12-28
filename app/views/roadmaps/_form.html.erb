@@ -1,0 +1,17 @@
+<%= form_for @roadmap do |form| %>
+  <%= form.label :the_one_thing, "Your ONE Thing" %>
+  <%= form.text_field :the_one_thing %>
+  <%= form.label :the_why_of_one_thing, "Why is it Your ONE Thing?" %>
+  <%= form.text_area :the_why_of_one_thing, size: "35x5" %>
+  <%= form.fields_for :milestones do |milestone| %>
+    <%= milestone.label :milestone_name, "What's the next milestone for Your ONE Thing?" %>
+    <%= milestone.text_field :name %>
+    <%= milestone.label :milestone_liveline, "When's your milestone supposed to be live?" %>
+    <%= milestone.date_field :liveline %>
+  <% end %>
+  <%= form.label :the_one_habit, "Your one habit" %>
+  <%= form.text_field :the_one_habit %>
+  <%= form.label :start_date, "When do you start all this rocking?" %>
+  <%= form.date_field :start_date %>
+  <%= form.submit "Go Rock!" %>
+<% end %>

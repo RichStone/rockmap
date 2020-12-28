@@ -1,13 +1,3 @@
 <h1>Your One Year Rockmap</h1>
 <%= render "flash" %>
-<%= form_with model: Roadmap.new do |form| %>
-  <%= form.label :the_one_thing, "Your ONE Thing" %>
-  <%= form.text_area :the_one_thing %>
-  <%= form.label :the_why_of_one_thing, "Why is it Your ONE Thing?" %>
-  <%= form.text_area :the_why_of_one_thing, size: "35x5" %>
-  <%= form.label :the_one_habit, "Your one habit" %>
-  <%= form.text_area :the_one_habit %>
-  <%= form.label :start_date, "When do you start?" %>
-  <%= form.date_field :start_date %>
-  <%= form.submit "Go Rock!" %>
-<% end %>
+<%= render "form" %>
