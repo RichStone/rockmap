@@ -14,6 +14,7 @@ class RoadmapsController < ApplicationController
 
     @roadmap = Roadmap.new
     @roadmap.milestones.build
+    @roadmap.accountability_buddies.build
   end
 
   def create
@@ -53,7 +54,8 @@ class RoadmapsController < ApplicationController
       :the_why_of_one_thing,
       :the_one_habit,
       :start_date,
-      {milestones_attributes: [:name, :liveline]}
+      {milestones_attributes: [:name, :liveline]},
+      {accountability_buddies_attributes: [:email, :reminder_period]}
     )
   end
 end

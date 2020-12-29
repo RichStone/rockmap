@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_163148) do
+ActiveRecord::Schema.define(version: 2020_12_29_155810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accountability_buddies", force: :cascade do |t|
+    t.string "email"
+    t.boolean "invite_accepted", default: false
+    t.integer "reminder_period"
+    t.date "last_reminder"
+    t.bigint "roadmap_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["roadmap_id"], name: "index_accountability_buddies_on_roadmap_id"
+  end
 
   create_table "milestones", force: :cascade do |t|
     t.string "name"
@@ -47,5 +58,6 @@ ActiveRecord::Schema.define(version: 2020_12_26_163148) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accountability_buddies", "roadmaps"
   add_foreign_key "milestones", "roadmaps"
 end

@@ -9,6 +9,12 @@
     <%= milestone.label :milestone_liveline, "When's your milestone supposed to be live?" %>
     <%= milestone.date_field :liveline %>
   <% end %>
+  <%= form.fields_for :accountability_buddies do |buddy| %>
+    <%= buddy.label :email, "Email of Your Accountability Buddy" %>
+    <%= buddy.text_field :email %>
+    <%= buddy.label :reminder_period, "Your buddy should be reminded to catch up on your rock map every X days:" %>
+    <%= buddy.select :reminder_period, [30, 45, 7, 14, ['None', nil]] %>
+  <% end %>
   <%= form.label :the_one_habit, "Your one habit" %>
   <%= form.text_field :the_one_habit %>
   <%= form.label :start_date, "When do you start all this rocking?" %>
