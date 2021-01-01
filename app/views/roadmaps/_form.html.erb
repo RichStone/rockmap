@@ -19,5 +19,7 @@
   <%= form.text_field :the_one_habit %>
   <%= form.label :start_date, "When do you start all this rocking?" %>
   <%= form.date_field :start_date %>
+  <%= form.label :reminder_period, "You will get a email reminder every X days:" %>
+  <%= form.number_field :reminder_period, in: 0..66, step: 1 %>
   <%= form.submit "Go Rock!" %>
 <% end %>

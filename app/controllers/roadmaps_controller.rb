@@ -54,8 +54,9 @@ class RoadmapsController < ApplicationController
       :the_why_of_one_thing,
       :the_one_habit,
       :start_date,
-      {milestones_attributes: [:name, :liveline]},
-      {accountability_buddies_attributes: [:email, :reminder_period]}
+      :reminder_period,
+      {milestones_attributes: [:id, :name, :liveline]},
+      {accountability_buddies_attributes: [:id, :email, :reminder_period]}
     )
   end
 end
