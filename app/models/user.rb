@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   has_one :roadmap, dependent: :destroy
+
+  def after_confirmation
+    UserMailer.with(user: self).welcome_email.deliver_later
+  end
 end
