@@ -1,3 +1,50 @@
+GIT
+  remote: https://github.com/rspec/rspec-core.git
+  revision: 1b65f8521ffc4d593662191fc8693907bc630e74
+  branch: main
+  specs:
+    rspec-core (3.11.0.pre)
+      rspec-support (= 3.11.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-expectations.git
+  revision: 3f880716f41e4af722d82ee636c48c7ac9a696db
+  branch: main
+  specs:
+    rspec-expectations (3.11.0.pre)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.11.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-mocks.git
+  revision: ea4d8ea4532480500462cc7a633d3408656a4dcd
+  branch: main
+  specs:
+    rspec-mocks (3.11.0.pre)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (= 3.11.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-rails.git
+  revision: 92e64afdd8b97a6971fadeb7fb17093d0bd9f398
+  branch: main
+  specs:
+    rspec-rails (4.1.0.pre)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (= 3.11.0.pre)
+      rspec-expectations (= 3.11.0.pre)
+      rspec-mocks (= 3.11.0.pre)
+      rspec-support (= 3.11.0.pre)
+
+GIT
+  remote: https://github.com/rspec/rspec-support.git
+  revision: 5f043d299ee75fb98c1718ecb8f73c2b6a8691d0
+  branch: main
+  specs:
+    rspec-support (3.11.0.pre)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -78,6 +125,7 @@ GEM
     childprocess (3.0.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.7)
+    connection_pool (2.2.3)
     crass (1.0.6)
     devise (4.7.3)
       bcrypt (~> 3.0)
@@ -88,9 +136,19 @@ GEM
     diff-lcs (1.4.4)
     docile (1.3.2)
     erubi (1.9.0)
+    et-orbi (1.2.4)
+      tzinfo
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     faker (2.14.0)
       i18n (>= 1.6, < 2)
     ffi (1.13.1)
+    fugit (1.4.1)
+      et-orbi (~> 1.1, >= 1.1.8)
+      raabro (~> 1.4)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.5)
@@ -126,6 +184,7 @@ GEM
     public_suffix (4.0.6)
     puma (4.3.6)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
       rack
@@ -146,6 +205,10 @@ GEM
       bundler (>= 1.3.0)
       railties (= 6.0.3.4)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -161,27 +224,11 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.2.5)
     regexp_parser (1.8.2)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rspec-core (3.10.0)
-      rspec-support (~> 3.10.0)
-    rspec-expectations (3.10.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-rails (4.0.1)
-      actionpack (>= 4.2)
-      activesupport (>= 4.2)
-      railties (>= 4.2)
-      rspec-core (~> 3.9)
-      rspec-expectations (~> 3.9)
-      rspec-mocks (~> 3.9)
-      rspec-support (~> 3.9)
-    rspec-support (3.10.0)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -196,6 +243,13 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sidekiq (6.1.2)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
+    sidekiq-cron (1.2.0)
+      fugit (~> 1.1)
+      sidekiq (>= 4.2.1)
     simplecov (0.19.1)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -250,6 +304,7 @@ DEPENDENCIES
   byebug
   capybara
   devise (~> 4.2)
+  factory_bot_rails
   faker
   jbuilder (~> 2.7)
   listen (~> 3.2)
@@ -258,8 +313,15 @@ DEPENDENCIES
   pry-rails
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
-  rspec-rails
+  rails-controller-testing
+  rspec-core!
+  rspec-expectations!
+  rspec-mocks!
+  rspec-rails!
+  rspec-support!
   sass-rails (>= 6)
+  sidekiq
+  sidekiq-cron (~> 1.1)
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
