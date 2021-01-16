@@ -2,7 +2,11 @@ class RoadmapsController < ApplicationController
   before_action :authenticate_user!, except: [:home]
 
   def show
-    @roadmap = current_user.roadmap
+    if current_user.roadmap
+      @roadmap = current_user.roadmap
+    else
+      redirect_to :action => 'new'
+    end
   end
 
   def new
