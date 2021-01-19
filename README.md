@@ -12,6 +12,12 @@ r s
 rails db:migrate RAILS_ENV=development
 ```
 
+REALLY drop database and migrate everything over again:
+
+```shell
+rake db:drop db:create db:migrate
+```
+
 ## Tests
 
 ### Run the tests
