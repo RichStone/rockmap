@@ -41,9 +41,19 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # use expect(...).to have_enqueued_job.on_queue('mailers')
+  # https://stackoverflow.com/a/49271855/5925094
+  config.active_job.queue_adapter = :test
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+
+  # From the post devise install notes:
+  # Ensure you have defined default url options in your environments files. Here
+  # is an example of default_url_options appropriate for a development environment
+  # in config/environments/development.rb:
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
