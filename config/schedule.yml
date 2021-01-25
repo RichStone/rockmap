@@ -1,0 +1,5 @@
+# config/schedule.yml
+periodic_rockmap_reminder_job:
+  cron: "0 19 * * *" # [run at specific] "minute hour day month year" [or every: *]
+  class: "PeriodicRockmapReminderJob"
+  queue: default
