@@ -24,11 +24,32 @@
 require 'rails_helper'
 
 RSpec.describe AccountabilityBuddy, type: :model do
-  subject(:buddy) { AccountabilityBuddy.new }
+  subject(:buddy) { AccountabilityBuddy.new(params) }
+  let(:params) {
+    {
+      email: 'huh@bau.com'
+    }
+  }
+
+  it 'must have an associated email address'
 
   context 'when just created' do
-    it "does not permit reminders" do
-      expect(buddy.reminder_permitted).to eq false
+    it 'does not permit reminders' do
+      expect(buddy.send(:reminder_permitted)).to eq false
+    end
+
+    describe '#send_consent_inquiry' do
+      let(:roadmap) { create(:roadmap) }
+
+      before do
+        buddy.roadmap = roadmap
+      end
+
+      it 'sends an email to the buddy' do
+        expect { buddy.save! }
+          .to have_enqueued_job(ActionMailer::MailDeliveryJob)
+                .with('BuddyMailer', 'buddy_request', 'deliver_now', params: {buddy: buddy}, args: [])
+      end
     end
   end
 
@@ -36,7 +57,7 @@ RSpec.describe AccountabilityBuddy, type: :model do
     before { buddy.accountability_consent_given = true }
 
     it 'permits buddy reminders' do
-      expect(buddy.reminder_permitted).to eq true
+      expect(buddy.send(:reminder_permitted)).to eq true
     end
   end
 end

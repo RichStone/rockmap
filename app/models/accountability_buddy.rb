@@ -24,6 +24,14 @@
 class AccountabilityBuddy < ApplicationRecord
   belongs_to :roadmap
 
+  after_create_commit :send_consent_inquiry
+
+  private
+
+  def send_consent_inquiry
+    BuddyMailer.with(buddy: self).buddy_request.deliver_later
+  end
+
   def reminder_permitted
     accountability_consent_given && activated_for_roadmap
   end
