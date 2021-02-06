@@ -44,7 +44,7 @@ rails c --sandbox
 
 On Linux, run RubyMine from Terminal to avoid issues with 
 [yarn integrity checks](https://youtrack.jetbrains.com/issue/IDEABKL-7589). Like
-when you want to run Rails console via the IDE for autocomplete etc.
+when you want to run `rails generate tests` via UI or to run Rails console via the IDE for autocomplete etc.
 
 ## README boiler
 
