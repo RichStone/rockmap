@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_27_161635) do
+ActiveRecord::Schema.define(version: 2021_02_02_160799) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "accountability_buddies", force: :cascade do |t|
@@ -26,6 +27,13 @@ ActiveRecord::Schema.define(version: 2021_01_27_161635) do
     t.boolean "accountability_consent_given", default: false
     t.boolean "activated_for_roadmap", default: true
     t.index ["roadmap_id"], name: "index_accountability_buddies_on_roadmap_id"
+  end
+
+  create_table "buddy_consents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.date "valid_until"
+    t.integer "accountability_buddy_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "milestones", force: :cascade do |t|
