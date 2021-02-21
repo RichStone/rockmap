@@ -17,8 +17,8 @@ RSpec.describe BuddyConsent, type: :model do
     expect(buddy_consent.valid_until).to be > Time.now
   end
 
-  describe ".create_and_deliver" do
-    it "creates the constent and sends the inquiry email" do
+  describe '.create_and_deliver' do
+    it 'creates the constent and sends the inquiry email' do
       pending
       buddy = FactoryBot.create(:accountability_buddy)
       expect {

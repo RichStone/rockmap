@@ -25,14 +25,15 @@ class AccountabilityBuddy < ApplicationRecord
   belongs_to :roadmap
   has_one :buddy_consent
 
-  after_create_commit :send_consent_inquiry
+  class << self
+    def create_with_consent_inquiry(attrs, &block)
+      buddy = create!(attrs, &block)
+      BuddyConsent.create_and_deliver(buddy)
+      buddy
+    end
+  end
 
   private
-
-  def send_consent_inquiry
-    consent_tracker = BuddyConsent.create!(accountability_buddy_id: self.id)
-    BuddyMailer.with(buddy: self, consent_link: consent_tracker.id).buddy_request.deliver_later
-  end
 
   def reminder_permitted
     accountability_consent_given && activated_for_roadmap

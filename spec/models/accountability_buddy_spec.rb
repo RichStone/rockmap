@@ -31,7 +31,6 @@ RSpec.describe AccountabilityBuddy, type: :model do
 
   describe '.create_with_consent_inquiry' do
     it 'creates the buddy and sends a new consent inquiry' do
-      pending
       allow(BuddyConsent).to receive(:create_and_deliver)
       roadmap = FactoryBot.create(:roadmap)
       buddy =
@@ -45,17 +44,6 @@ RSpec.describe AccountabilityBuddy, type: :model do
   context 'when just created' do
     it 'does not permit reminders' do
       expect(buddy.send(:reminder_permitted)).to eq false
-    end
-
-    describe 'after_save callback' do
-      let(:saving) do
-        buddy.save!
-        buddy.reload
-      end
-
-      it 'creates a new BuddyConsent' do
-        expect { saving }.to(change { BuddyConsent.all.count }.from(0).to(1))
-      end
     end
   end
 

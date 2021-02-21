@@ -25,6 +25,11 @@ class RoadmapsController < ApplicationController
     @roadmap = current_user.create_roadmap(roadmap_params)
 
     if @roadmap.save
+      if roadmap_params[:accountability_buddies_attributes]
+        AccountabilityBuddy.create_with_consent_inquiry(
+          roadmap_params[:accountability_buddies_attributes].to_h['0'].merge(roadmap_id: @roadmap.id)
+        )
+      end
       redirect_to :action => 'show', success: 'Now you are even more awesome!'
     else
       flash[:alert] = 'Wrong details. You can do better ;)'
@@ -40,6 +45,12 @@ class RoadmapsController < ApplicationController
     @roadmap = current_user.roadmap
 
     if @roadmap.update(roadmap_params)
+      if roadmap_params[:accountability_buddies_attributes]
+        AccountabilityBuddy.create_with_consent_inquiry(
+          roadmap_params[:accountability_buddies_attributes].to_h,
+        )
+      end
+
       redirect_to controller: 'roadmaps',
                   action: 'show',
                   id: current_user.roadmap.id,

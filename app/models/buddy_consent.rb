@@ -13,4 +13,15 @@ require 'securerandom'
 class BuddyConsent < ApplicationRecord
   attribute :valid_until, default: Date.tomorrow
   belongs_to :accountability_buddy
+
+  class << self
+    def create_and_deliver(buddy)
+      consent = BuddyConsent.create!(accountability_buddy: buddy)
+      BuddyMailer
+        .with(buddy: buddy, consent_id: consent.id)
+        .buddy_request
+        .deliver_later
+      consent
+    end
+  end
 end
