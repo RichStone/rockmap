@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: buddy_consents
+#
+#  id                      :uuid             not null, primary key
+#  valid_until             :date
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  accountability_buddy_id :integer(4)
+#
 require 'rails_helper'
 
 RSpec.describe BuddyConsent, type: :model do
