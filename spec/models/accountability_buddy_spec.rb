@@ -29,6 +29,19 @@ RSpec.describe AccountabilityBuddy, type: :model do
 
   it { is_expected.to have_attributes(email: email)}
 
+  describe '.create_with_consent_inquiry' do
+    it 'creates the buddy and sends a new consent inquiry' do
+      pending
+      allow(BuddyConsent).to receive(:create_and_deliver)
+      roadmap = FactoryBot.create(:roadmap)
+      buddy =
+        AccountabilityBuddy.create_with_consent_inquiry(email: 'asdf@example.com', roadmap: roadmap)
+      expect(buddy).to be_persisted
+      expect(buddy.email).to eq('asdf@example.com')
+      expect(BuddyConsent).to have_received(:create_and_deliver).with(buddy)
+    end
+  end
+
   context 'when just created' do
     it 'does not permit reminders' do
       expect(buddy.send(:reminder_permitted)).to eq false

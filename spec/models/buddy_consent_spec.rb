@@ -16,4 +16,19 @@ RSpec.describe BuddyConsent, type: :model do
   it 'exposes a future valid_until date' do
     expect(buddy_consent.valid_until).to be > Time.now
   end
+
+  describe ".create_and_deliver" do
+    it "creates the constent and sends the inquiry email" do
+      pending
+      buddy = FactoryBot.create(:accountability_buddy)
+      expect {
+        BuddyConsent.create_and_deliver(buddy)
+      }.to have_enqueued_mail(
+             BuddyMailer, :buddy_request
+           ).with(
+        buddy: buddy,
+        consent_tracker: BuddyConsent.find_by!(accountability_buddy: buddy)
+      )
+    end
+  end
 end
