@@ -24,31 +24,31 @@
 require 'rails_helper'
 
 RSpec.describe AccountabilityBuddy, type: :model do
-  subject(:buddy) { AccountabilityBuddy.new(params) }
-  let(:params) {
-    {
-      email: 'huh@bau.com'
-    }
-  }
+  subject(:buddy) { build(:accountability_buddy, email: email) }
+  let(:email) { 'asdf@adf.com'}
 
-  it 'must have an associated email address'
+  it { is_expected.to have_attributes(email: email)}
 
   context 'when just created' do
     it 'does not permit reminders' do
       expect(buddy.send(:reminder_permitted)).to eq false
     end
 
-    describe '#send_consent_inquiry' do
-      let(:roadmap) { create(:roadmap) }
-
-      before do
-        buddy.roadmap = roadmap
+    describe 'after_save callback' do
+      let(:saving) do
+        buddy.save!
+        buddy.reload
       end
 
       it 'sends an email to the buddy' do
-        expect { buddy.save! }
+        # how that works: https://stackoverflow.com/questions/22988968/testing-after-commit-with-rspec-and-mocking/30901628#comment43748375_22989816
+        expect { saving }
           .to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                .with('BuddyMailer', 'buddy_request', 'deliver_now', params: {buddy: buddy}, args: [])
+                .with('BuddyMailer', 'buddy_request', 'deliver_now', params: {buddy: buddy, consent_link: BuddyConsent.last.id }, args: [])
+      end
+
+      it 'creates a new BuddyConsent' do
+        expect { saving }.to(change { BuddyConsent.all.count }.from(0).to(1))
       end
     end
   end

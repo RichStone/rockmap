@@ -1,8 +1,8 @@
 class BuddyMailer < ApplicationMailer
   def buddy_request
-    puts 'SEEEENDD'
     @buddy = params[:buddy]
     @rockstar_email = @buddy.roadmap.user.email
+    @consent_link = params[:consent_link]
     mail(to: @buddy.email, subject: "Do you want to be an accountability buddy for #{@rockstar_email}")
   end
 
