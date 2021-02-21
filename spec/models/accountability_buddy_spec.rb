@@ -40,13 +40,6 @@ RSpec.describe AccountabilityBuddy, type: :model do
         buddy.reload
       end
 
-      it 'sends an email to the buddy' do
-        # how that works: https://stackoverflow.com/questions/22988968/testing-after-commit-with-rspec-and-mocking/30901628#comment43748375_22989816
-        expect { saving }
-          .to have_enqueued_job(ActionMailer::MailDeliveryJob)
-                .with('BuddyMailer', 'buddy_request', 'deliver_now', params: {buddy: buddy, consent_link: BuddyConsent.last.id }, args: [])
-      end
-
       it 'creates a new BuddyConsent' do
         expect { saving }.to(change { BuddyConsent.all.count }.from(0).to(1))
       end
