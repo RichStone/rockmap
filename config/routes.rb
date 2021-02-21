@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   end
   root 'roadmaps#home'
   resources :roadmaps
+  get '/consent_given/:consent_id', to: 'buddy_consents#consent_given'
 end
