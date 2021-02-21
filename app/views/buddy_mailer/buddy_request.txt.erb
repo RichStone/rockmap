@@ -4,4 +4,8 @@ Will you support <%= @rockstar_email %> with his roadmap?
 
 Open this link in your browser if you are up for it and have fun:
 
-http://localhost:3004/consent_given/<%=@consent_link%>
+<%= root_url %>consent_given/<%= @consent_id %>
+
+  <!-- I know this is unacceptable, but it was too late and I couldn't get -->
+  <!-- link_to consent_given_url, consent_id: @consent_id -->
+  <!-- to work 😱 -->

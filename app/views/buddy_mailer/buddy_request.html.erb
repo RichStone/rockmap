@@ -7,6 +7,9 @@
   <h1>Hey, <%= @buddy.email %></h1>
   <p>Will you support <%= @rockstar_email %> with his roadmap?</p>
   <p>Your consent link:</p>
-  <a href="http://localhost:3004/consent_given/<%=@consent_link%>">Click here! (This is not a virus!😬)</a>
+  <!-- I know this is unacceptable, but it was too late and I couldn't get -->
+  <!-- link_to consent_given_url, consent_id: @consent_id -->
+  <!-- to work 😱 -->
+  <a href="<%= root_url %>consent_given/<%= @consent_id %>">Click here! (This is not a virus!😬)</a>
 </body>
 </html>
