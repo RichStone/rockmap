@@ -23,8 +23,9 @@
 #
 class AccountabilityBuddy < ApplicationRecord
   belongs_to :roadmap
+  has_one :buddy_consent
 
-  after_save_commit :send_consent_inquiry
+  after_create_commit :send_consent_inquiry
 
   private
 
