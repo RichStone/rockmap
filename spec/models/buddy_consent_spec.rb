@@ -20,6 +20,7 @@ RSpec.describe BuddyConsent, type: :model do
   describe '.create_and_deliver' do
     it 'creates the constent and sends the inquiry email' do
       pending
+      # TODO: see railslink slack notes in kanbanflow task
       buddy = FactoryBot.create(:accountability_buddy)
       expect {
         BuddyConsent.create_and_deliver(buddy)
