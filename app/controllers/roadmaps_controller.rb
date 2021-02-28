@@ -71,7 +71,6 @@ class RoadmapsController < ApplicationController
       :start_date,
       :reminder_period_days,
       {milestones_attributes: [:id, :name, :liveline]},
-      {accountability_buddies_attributes: [:id, :email, :reminder_period]}
     )
   end
 end
