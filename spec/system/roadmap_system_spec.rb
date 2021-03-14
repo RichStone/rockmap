@@ -4,7 +4,7 @@ RSpec.describe "Roadmap", type: :system do
   it 'lets a Rockstar sign up' do
     visit '/'
     expect(current_path).to eq root_path
-    find('#new-rockmap-btn').click
+    find('.new-rockmap-btn', match: :first).click
 
     expect(current_path).to eq new_user_session_path
     click_link 'Sign up'
