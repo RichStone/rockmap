@@ -18,8 +18,15 @@ $danger-color: hsl(8, 64%, 67%);
 
 /* universal */
 
-body {
-  margin: 25px 50px;
+main, header, section, aside, footer {
+  margin: 0;
+  padding: 15px;
+  // development mode
+  //border: 1px solid #000000;
+}
+
+main > h1, h2 {
+  margin: 24px;
 }
 
 #title {
@@ -36,21 +43,22 @@ body {
   border-style: none;
   border-radius: 15px;
   padding: 15px;
-  font-size: 16px;
   font-weight: bold;
+  font-size: 1.1em;
+  margin: 24px 0;
 
   &:hover {
     cursor: pointer;
   }
 }
 
-
 /* header */
 
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
 
   a {
     text-decoration: none;
@@ -60,8 +68,10 @@ header {
   ul {
     display: flex;
     justify-content: space-between;
-    min-width: 250px;
     list-style-type: none;
+    margin: 0 10px;
+    padding: 0;
+    min-width: 280px;
   }
 }
 
@@ -97,4 +107,37 @@ p {
   font-size: 16px;
   line-height: 1.7em;
   margin: 20px auto;
+  max-width: 35em;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+  h1 {
+    display: none;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  header {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 20px;
+  }
 }
