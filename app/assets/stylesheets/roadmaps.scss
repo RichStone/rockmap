@@ -10,34 +10,9 @@ $accent-color: hsl(38, 75%, 66%);
 $accent-strong-color: hsl(38, 69%, 56%);
 $danger-color: hsl(8, 64%, 67%);
 
-@mixin box_sizing {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
+$border-radius-forms: 15px;
 
-/* universal */
-
-main, header, section, aside, footer {
-  margin: 0;
-  padding: 15px;
-  // development mode
-  //border: 1px solid #000000;
-}
-
-main > h1, h2 {
-  margin: 24px;
-}
-
-#title {
-  text-align: center;
-}
-
-.cta {
-  text-align: center;
-}
-
-.new-rockmap-btn {
+@mixin form_button {
   background-color: $main-accent-color;
   color: white;
   border-style: none;
@@ -50,6 +25,37 @@ main > h1, h2 {
   &:hover {
     cursor: pointer;
   }
+}
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* universal - mobile first - media queries for bigger screens last */
+
+main, header, section, aside, footer {
+  margin: 0;
+  padding: 15px;
+  // development mode
+  //border: 1px solid #000000;
+}
+
+main > h1, h2 {
+  margin-top: 36px;
+}
+
+#title {
+  text-align: center;
+}
+
+.cta {
+  text-align: center;
+}
+
+.new-rockmap-btn {
+  @include form_button;
 }
 
 /* header */
@@ -110,14 +116,53 @@ p {
   max-width: 35em;
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
+/* devise specific styles */
+
+form.new_user, form.edit_user {
+  text-align: center;
+
+  .field > input {
+    border-radius: $border-radius-forms;
+    min-width: 50px;
+    min-height: 25px;
+    margin: 10px 0;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input[type=submit] {
+    @include form_button;
+  }
+
+  .field {
+    padding: 10px;
+  }
+}
+
+.devise-links {
+  text-align: center;
+}
+
+.devise-link {
+  display: inline-block;
+  color: $main-accent-color;
+  text-decoration: none;
+  justify-self: center;
+  margin: 3px auto;
+}
+
+/* larger screen styles */
+
+/* small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 600px) {
   h1 {
     display: none;
   }
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
+/* small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   header {
     display: flex;
@@ -131,7 +176,7 @@ p {
   }
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
+/* even larger devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   header {
     font-size: 20px;
