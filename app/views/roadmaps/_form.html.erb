@@ -1,4 +1,4 @@
-<%= form_for @roadmap do |form| %>
+<%= form_for @roadmap, html: {class: "roadmap_form"} do |form| %>
   <%= form.label :the_one_thing, "Your ONE Thing" %>
   <%= form.text_field :the_one_thing %>
   <%= form.label :the_why_of_one_thing, "Why is it Your ONE Thing?" %>
